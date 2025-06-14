@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Crear Carpeta y Subir Archivos</title>
+</head>
+<body>
+  <h2>Crear Carpeta y Subir Archivos</h2>
+  <form id="formulario" enctype="multipart/form-data">
+    <label>Ruta base:</label><br>
+    <input type="text" name="ruta_base" required><br><br>
+
+    <label>Subcarpeta 1:</label><br>
+    <input type="text" name="subcarpetas[]"><br>
+    <label>Subcarpeta 2:</label><br>
+    <input type="text" name="subcarpetas[]"><br><br>
+
+    <label>Archivos a subir:</label><br>
+    <input type="file" name="archivos[]" multiple><br><br>
+
+    <button type="submit">Crear y Subir</button>
+  </form>
+
+  <p id="respuesta"></p>
+
+  <script>
+    document.getElementById('formulario').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const formData = new FormData(this);
+
+      fetch('http://127.0.0.1:5000/crear_y_subir', {
+        method: 'POST',
+        body: formData
+      })
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById('respuesta').innerText = data.mensaje || data.error;
+      })
+      .catch(err => {
+        document.getElementById('respuesta').innerText = 'Error: ' + err;
+      });
+    });
+  </script>
+</body>
+</html>
