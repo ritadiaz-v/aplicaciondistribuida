@@ -1,0 +1,40 @@
+# se define la interfaz abstracta
+
+from abc import ABC, abstractmethod
+
+class Notificador(ABC):
+    @abstractmethod
+    def enviar(self, mensaje: str):
+        pass
+
+# se crea la implementacion concreta
+class NotificadorEmail(Notificador):
+    def enviar(self, mensaje: str):
+        print(f"[EMAIL] {mensaje}")
+
+class NotificadorWhatsApp(Notificador):
+    def enviar(self, mensaje: str):
+        print(f"[WhatsApp] {mensaje}")
+
+class NotificadorMock(Notificador):
+    def enviar(self, mensaje: str):
+        print(f"[MOCK] {mensaje} (prueba)")
+
+# se programa la interfaz para cita medica y no la implementación
+class CitaMedica:
+    def __init__(self, notificador: Notificador):
+        self.notificador = notificador
+
+    def agendar(self):
+        print("Cita médica agendada.")
+        self.notificador.enviar("Recuerde su cita mañana a las 10 a.m.")
+
+# uso
+cita1 = CitaMedica(NotificadorEmail())
+cita1.agendar()
+
+cita2 = CitaMedica(NotificadorWhatsApp())
+cita2.agendar()
+
+cita3 = CitaMedica(NotificadorMock())
+cita3.agendar()
