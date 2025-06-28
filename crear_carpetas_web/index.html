@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Crear Carpeta desde HTML</title>
+</head>
+<body>
+  <h2>Crear Carpeta</h2>
+  <label>Ruta base:</label>
+  <input type="text" id="ruta_base" placeholder="D:/MisCarpetas"><br><br>
+
+  <label>Subcarpeta 1:</label>
+  <input type="text" id="sub1" placeholder="2025"><br><br>
+
+  <label>Subcarpeta 2:</label>
+  <input type="text" id="sub2" placeholder="Proyecto1"><br><br>
+
+  <button onclick="crearCarpeta()">Crear Carpeta</button>
+
+  <p id="resultado"></p>
+
+  <script>
+    function crearCarpeta() {
+      const ruta_base = document.getElementById('ruta_base').value;
+      const sub1 = document.getElementById('sub1').value;
+      const sub2 = document.getElementById('sub2').value;
+
+      fetch('http://127.0.0.1:5000/crear_carpeta', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          ruta_base: ruta_base,
+          subcarpetas: [sub1, sub2]
+        })
+      })
+      .then(response => response.json())
+      .then(data => {
+        document.getElementById('resultado').innerText = data.mensaje || data.error;
+      })
+      .catch(error => {
+        document.getElementById('resultado').innerText = "Error: " + error;
+      });
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+🧾 INSTRUCCIONES PARA CREAR CARPETAS DESDE HTML USANDO PYTHON
+
+1. INSTALA DEPENDENCIAS
+------------------------
+Abre PowerShell o CMD y ejecuta:
+
+python -m pip install flask flask-cors
+
+2. INICIA EL SERVIDOR
+------------------------
+Desde la carpeta donde está este archivo, ejecuta:
+
+python servidor.py
+
+Debe mostrar:
+ * Running on http://127.0.0.1:5000
+
+3. ABRE LA INTERFAZ WEB
+------------------------
+Haz doble clic en "index.html" o abrelo desde el navegador.
+
+4. CREA LA CARPETA
+------------------------
+- Ingresa una ruta base (ej: D:/MisCarpetas)
+- Subcarpeta 1 (ej: 2025)
+- Subcarpeta 2 (ej: Proyecto1)
+- Haz clic en "Crear Carpeta"
+
+El servidor creará la carpeta si tiene permisos.
+
+💡 NOTA:
+Si ves el error "Failed to fetch", asegúrate de que el servidor esté corriendo y que flask-cors esté habilitado.
